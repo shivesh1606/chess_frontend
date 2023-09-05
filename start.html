@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/form.css" />
+    <title>Start Game</title>
+  </head>
+
+  <body>
+    <div class="container height-100">
+      <form class="register-form">
+        <h1>Start A Game</h1>
+        <input
+          type="text"
+          id="room_id"
+          name="room_id"
+          placeholder="Enter Game Id to join"
+          required
+        />
+        <select id="role" class="p-10" name="role" placeholder="Select Role" required>
+          <option value="spectator">Spectator</option>
+          <option value="player">Player</option>
+        </select>
+        <div class="d-flex flex-column">
+          <button type="submit" id="join">Start Game</button>
+          <button type="submit" id="create">Create New Game</button>
+          <button type="submit" id="play">Play with computer</button>
+        </div>
+        <div id="info-container" class="info-message"></div>
+      </form>
+    </div>
+  </body>
+  <script type="module" src="./js/game.js"></script>
+  <script type="module" src="./js/start.js"></script>
+</html>

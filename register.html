@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/styles.css" />
+  <link rel="stylesheet" href="./css/form.css" />
+  <title>Registration Page</title>
+</head>
+
+<body>
+  <div class="container height-100">
+    <form class="register-form">
+      <h1>Registration Page</h1>
+      <input type="text" id="username" name="username" placeholder="Enter Username" required />
+      <input type="password" id="password" name="password" placeholder="Enter Password" required />
+      <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required />
+      <input type="text" id="firstname" placeholder="Enter Firstname" name="firstname" required />
+      <input type="text" id="lastname" placeholder="Enter Lastname" name="lastname" required />
+      <select name="type" id="type"  class="p-10" placeholder="Choose type" required>
+        <option value="player">player</option>
+        <option value="guest">guest</option>
+      </select>
+      <div>
+        <button type="submit" id="register">Register</button>
+        <button type="submit" id="signin">
+          <a href="/login.html" style="text-decoration: none; color: inherit">LogIn</a>
+        </button>
+      </div>
+      <div id="info-container" class="info-message"></div>
+    </form>
+  </div>
+</body>
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const usernameField = document.getElementById("username");
+    const passwordField = document.getElementById("password");
+    const firstnameField = document.getElementById("firstname");
+    const lastnameField = document.getElementById("lastname");
+    const typeField = document.getElementById("type");
+    const confirmPasswordField = document.getElementById("confirm_password");
+    const infoContainer = document.getElementById("info-container");
+    const submitButton = document.querySelector("button[type=submit]");
+
+    function handlePasswordMismatch() {
+      const password = passwordField.value;
+      const confirmPassword = confirmPasswordField.value;
+
+      if (password !== confirmPassword) {
+        infoContainer.textContent = "Passwords do not match";
+        confirmPasswordField.classList.add("error");
+      } else {
+        infoContainer.textContent = "";
+        confirmPasswordField.classList.remove("error");
+      }
+    }
+
+    function callRegisterApi(e) {
+      e.preventDefault();
+      if (passwordField.value !== confirmPasswordField.value) {
+        handlePasswordMismatch();
+      } else {
+        fetch("http://localhost:3000/users/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: usernameField.value,
+            password: passwordField.value,
+            firstName: firstnameField.value,
+            lastName: lastnameField.value,
+            type: typeField.value
+          }),
+        }).then((res) => {
+          if (res.ok) {
+            infoContainer.innerHTML =
+              "Registerd Sucessfully<br/>Please go to SignIn page to continue";
+            confirmPasswordField.classList.add("success");
+          }
+        });
+        
+      }
+    }
+
+    confirmPasswordField.addEventListener("input", handlePasswordMismatch);
+    submitButton.addEventListener("click", callRegisterApi);
+  });
+</script>
+
+</html>

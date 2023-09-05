@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+    background-color: rgb(200, 242, 255);
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: monospace;
+}
+
+.height-100 {
+    height: 100vh;
+}
+
+h1 {
+    font-family: monospace;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 45px;
+    text-align: center;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 20px;
+    background: rgb(5, 241, 104);
+    color: white;
+    outline: none;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-family: monospace;
+    font-size: 17px;
+    font-weight: bolder;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:focus {
+    outline: none;
+}
+
+.d-flex{
+    display: flex;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+.p-10{
+    padding: 10px;
+}
+
+.pr-10{
+    padding-right: 10px;
+}

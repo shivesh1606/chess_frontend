@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/styles.css" />
+  <link rel="stylesheet" href="./css/game.css" />
+  <title>Chess Game</title>
+  <script src="./js/auth.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Chess Game</h1>
+    <h2 class="player-color">Your are </h2>
+    <div class="promote-pieces-menu d-none flex-direction-column">
+      <h2>Choose a piece to promote</h2>
+      <div class="chess-menu menu-black d-none">
+        <div class="chess-menu-item">♜</div>
+        <div class="chess-menu-item">♝</div>
+        <div class="chess-menu-item">♞</div>
+        <div class="chess-menu-item">♛</div>
+      </div>
+      <div class="chess-menu menu-white d-none">
+        <div class="chess-menu-item">♖</div>
+        <div class="chess-menu-item">♗</div>
+        <div class="chess-menu-item">♘</div>
+        <div class="chess-menu-item">♕</div>
+      </div>
+      <button class="promote-btn">Promote</button>
+    </div>
+    <div class="board">
+      <div class="square white" data-row="0" data-col="0"></div>
+      <div class="square black" data-row="0" data-col="1"></div>
+      <div class="square white" data-row="0" data-col="2"></div>
+      <div class="square black" data-row="0" data-col="3"></div>
+      <div class="square white" data-row="0" data-col="4"></div>
+      <div class="square black" data-row="0" data-col="5"></div>
+      <div class="square white" data-row="0" data-col="6"></div>
+      <div class="square black" data-row="0" data-col="7"></div>
+      <div class="square black" data-row="1" data-col="0"></div>
+      <div class="square white" data-row="1" data-col="1"></div>
+      <div class="square black" data-row="1" data-col="2"></div>
+      <div class="square white" data-row="1" data-col="3"></div>
+      <div class="square black" data-row="1" data-col="4"></div>
+      <div class="square white" data-row="1" data-col="5"></div>
+      <div class="square black" data-row="1" data-col="6"></div>
+      <div class="square white" data-row="1" data-col="7"></div>
+      <div class="square white" data-row="2" data-col="0"></div>
+      <div class="square black" data-row="2" data-col="1"></div>
+      <div class="square white" data-row="2" data-col="2"></div>
+      <div class="square black" data-row="2" data-col="3"></div>
+      <div class="square white" data-row="2" data-col="4"></div>
+      <div class="square black" data-row="2" data-col="5"></div>
+      <div class="square white" data-row="2" data-col="6"></div>
+      <div class="square black" data-row="2" data-col="7"></div>
+      <div class="square black" data-row="3" data-col="0"></div>
+      <div class="square white" data-row="3" data-col="1"></div>
+      <div class="square black" data-row="3" data-col="2"></div>
+      <div class="square white" data-row="3" data-col="3"></div>
+      <div class="square black" data-row="3" data-col="4"></div>
+      <div class="square white" data-row="3" data-col="5"></div>
+      <div class="square black" data-row="3" data-col="6"></div>
+      <div class="square white" data-row="3" data-col="7"></div>
+      <div class="square white" data-row="4" data-col="0"></div>
+      <div class="square black" data-row="4" data-col="1"></div>
+      <div class="square white" data-row="4" data-col="2"></div>
+      <div class="square black" data-row="4" data-col="3"></div>
+      <div class="square white" data-row="4" data-col="4"></div>
+      <div class="square black" data-row="4" data-col="5"></div>
+      <div class="square white" data-row="4" data-col="6"></div>
+      <div class="square black" data-row="4" data-col="7"></div>
+      <div class="square black" data-row="5" data-col="0"></div>
+      <div class="square white" data-row="5" data-col="1"></div>
+      <div class="square black" data-row="5" data-col="2"></div>
+      <div class="square white" data-row="5" data-col="3"></div>
+      <div class="square black" data-row="5" data-col="4"></div>
+      <div class="square white" data-row="5" data-col="5"></div>
+      <div class="square black" data-row="5" data-col="6"></div>
+      <div class="square white" data-row="5" data-col="7"></div>
+      <div class="square white" data-row="6" data-col="0"></div>
+      <div class="square black" data-row="6" data-col="1"></div>
+      <div class="square white" data-row="6" data-col="2"></div>
+      <div class="square black" data-row="6" data-col="3"></div>
+      <div class="square white" data-row="6" data-col="4"></div>
+      <div class="square black" data-row="6" data-col="5"></div>
+      <div class="square white" data-row="6" data-col="6"></div>
+      <div class="square black" data-row="6" data-col="7"></div>
+      <div class="square black" data-row="7" data-col="0"></div>
+      <div class="square white" data-row="7" data-col="1"></div>
+      <div class="square black" data-row="7" data-col="2"></div>
+      <div class="square white" data-row="7" data-col="3"></div>
+      <div class="square black" data-row="7" data-col="4"></div>
+      <div class="square white" data-row="7" data-col="5"></div>
+      <div class="square black" data-row="7" data-col="6"></div>
+      <div class="square white" data-row="7" data-col="7"></div>
+
+      <!-- Add more squares for the complete chessboard -->
+    </div>
+    <h2 class="players">
+      Current Player: <span class="current-player">white</span>
+    </h2>
+    <div class="lost-pieces">
+      <h2>Lost White Pieces: <span class="lost-pieces-white"></span></h2>
+      <h2>Lost Black Pieces: <span class="lost-pieces-black"></span></h2>
+    </div>
+    <div>
+      <button class="new-game">New Game</button>
+    </div>
+  </div>
+</body>
+<script>
+  // Chess game logic
+  const whites = ["♖", "♘", "♗", "♕", "♔", "♙"];
+  const blacks = ["♜", "♞", "♝", "♛", "♚", "♟"];
+  const validityFunctions = {
+    "♖": isValidRookMove,
+    "♜": isValidRookMove,
+    "♘": isValidKnightMove,
+    "♞": isValidKnightMove,
+    "♗": isValidBishopMove,
+    "♝": isValidBishopMove,
+    "♕": isValidQueenMove,
+    "♛": isValidQueenMove,
+    "♔": isValidKingMove,
+    "♚": isValidKingMove,
+    "♙": isValidPawnMove, 
+    "♟": isValidPawnMove,
+  };
+
+  const currentPlayerSpan = document.querySelector(".current-player");
+  const lostWhitePieces = document.querySelector(".lost-pieces-white");
+  const lostBlackPieces = document.querySelector(".lost-pieces-black");
+  const squares = document.querySelectorAll(".square");
+  const resetButton = document.querySelector(".new-game");
+  const promotePiecesMenu = document.querySelector(".promote-pieces-menu");
+  const chessMenus = document.querySelectorAll(".chess-menu");
+  const chessMenuItems = document.querySelectorAll(".chess-menu-item");
+  const playerColor = document.querySelector(".player-color")
+  const board = document.querySelector(".board")
+
+  // Initial state of the chessboard
+  let chessboard = [
+    ["♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜"],
+    ["♟", "♟", "♟", "♟", "♟", "♟", "♟", "♟"],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", "", ""],
+    ["♙", "♙", "♙", "♙", "♙", "♙", "♙", "♙"],
+    ["♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"],
+  ];
+
+  let selectedSquare = null; // Track the currently selected piece
+  let currentPlayer = null; // Track the current player
+  let lastMove = null; // Track the last move played
+  let isWhiteKingMoved = false; // Track the movement status of white king
+  let isBlackKingMoved = false; // Track the movement status of black king
+  let isWhiteRookLeftMoved = false; // Track the movement status of white left rook
+  let isBlackRookLeftMoved = false; // Track the movement status of black left rook
+  let isWhiteRookRightMoved = false; // Track the movement status of white right rook
+  let isBlackRookRightMoved = false; // Track the movement status of black right rook
+  let promotionRow = null; // Tracks the the row to which pawn is getting promoted
+  let promotionCol = null; // Tracks the the col to which pawn is getting promoted
+  let myColor = null; // Tracks my color
+  let websocket = null; // Tracks websocket connection
+
+  function setupWebSocket() {
+    if (localStorage.getItem("room_id")) {
+      websocket = new WebSocket(
+        `ws://localhost:3000/?token=${localStorage.getItem(
+          "token"
+        )}&room_id=${localStorage.getItem(
+          "room_id"
+        )}&role=${localStorage.getItem("role")}`
+      );
+      myColor =
+        localStorage.getItem("username") === localStorage.getItem("room_id")
+          ? "white"
+          : "black";
+      playerColor.innerHTML += " " + myColor;
+      if (myColor == "black") {
+        board.style.transform = "rotate(180deg)";
+        squares.forEach(item => item.style.transform = "rotate(180deg)");
+      }
+      websocket.addEventListener("message", (message) => {
+        message = JSON.parse(message.data);
+        console.log(message);
+        if (
+          message.move &&
+          message.move.token !== localStorage.getItem("token")
+        )
+          makeMove(
+            message.move.fromRow,
+            message.move.fromCol,
+            message.move.toRow,
+            message.move.toCol,
+            (myMove = false)
+          );
+        if (message.error) console.log(message);
+      });
+    }
+  }
+
+  // A function to start a new game
+  function resetGame() {
+    // Defining the chess board initial state
+    chessboard = [
+      ["♜", "♞", "♝", "♛", "♚", "♝", "♞", "♜"],
+      ["♟", "♟", "♟", "♟", "♟", "♟", "♟", "♟"],
+      ["", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", ""],
+      ["", "", "", "", "", "", "", ""],
+      ["♙", "♙", "♙", "♙", "♙", "♙", "♙", "♙"],
+      ["♖", "♘", "♗", "♕", "♔", "♗", "♘", "♖"],
+    ];
+
+    // Putting all the pieces at the right place
+    for (let i = 0; i < 8; i++) {
+      for (let j = 0; j < 8; j++) {
+        squares[i * 8 + j].innerHTML = chessboard[i][j];
+        squares[i * 8 + j].addEventListener("click", () =>
+          selectSquare(i, j)
+        );
+      }
+    }
+
+    // Removing highlight css from all the squares
+    document
+      .querySelectorAll(".highlight")
+      .forEach((square) => square.classList.remove("highlight"));
+    document
+      .querySelectorAll(".red")
+      .forEach((square) => square.classList.remove("red"));
+
+    // Hiding the promotion pieces dropdown
+    document.querySelector(".promote-pieces-menu").classList.remove("d-flex");
+    document.querySelector(".promote-pieces-menu").classList.add("d-none");
+
+    currentPlayerSpan.innerHTML = "white"; // White to play first
+    lostBlackPieces.innerHTML = ""; // No lost pieces of black initially
+    lostWhitePieces.innerHTML = ""; // No lost pieces of white initially
+
+    selectedSquare = null; // No square is selected initially
+    currentPlayer = "white"; // White to Play first
+    lastMove = null; // No move played before the start of the game
+    isWhiteKingMoved = false;
+    isBlackKingMoved = false;
+    isWhiteRookLeftMoved = false;
+    isBlackRookLeftMoved = false;
+    isWhiteRookRightMoved = false;
+    isBlackRookRightMoved = false;
+  }
+
+  resetButton.addEventListener("click", () => {
+    window.location.reload();
+  });
+
+  // Function to select a square and make moves
+  async function selectSquare(row, col) {
+    if (currentPlayer !== myColor) {
+      alert("wait for opponent to make a move");
+      return;
+    }
+
+    const square = document.querySelector(
+      `.square[data-row="${row}"][data-col="${col}"]`
+    );
+
+    // If no square was selected earlier
+    if (selectedSquare === null) {
+      // Remove existing highlighting
+      document.querySelectorAll(".square").forEach((item) => {
+        item.classList.remove("highlight");
+        item.classList.remove("red");
+      });
+      // If currently selected square is empty we alert
+      if (square.textContent === "") {
+        alert("Please select square with a piece");
+      } else {
+        // If currently selected square has opponent's piece then we show an alert.
+        if (isOpponentPiece(square.textContent)) {
+          alert("You can't move opponent's piece");
+        }
+        // If the currently selected square contains current player's piece
+        else {
+          // Setting the current square as selected square
+          selectedSquare = square;
+          // Highlighting the square to display the piece is selected
+          square.classList.add("red");
+          // Displaying all the possible moves of the selected piece
+          highlightValidMoves(square.textContent, row, col);
+        }
+      }
+    }
+    // If a piece was already selected
+    else {
+      // Getting the row & col of the selected piece
+      const selectedRow = parseInt(selectedSquare.getAttribute("data-row"));
+      const selectedCol = parseInt(selectedSquare.getAttribute("data-col"));
+
+      // If the currently selected square contains current player's piece
+      if (square.textContent !== "" && !isOpponentPiece(square.textContent)) {
+        // Remove existing highlighting
+        document.querySelectorAll(".square").forEach((item) => {
+          item.classList.remove("highlight");
+          item.classList.remove("red"); 
+        });
+        // Resetting the selected square to currently selected square
+        selectedSquare = square;
+        // Highlighting the currently selected square to display a new piece is selected
+        square.classList.add("red");
+        // Displaying all the possible moves of the newly selected piece
+        highlightValidMoves(square.textContent, row, col);
+      }
+      // If the currently selected square is empty & doesn't contain current player's piece
+      else {
+        // Checking if the move is valid
+        let isValid = squares[row * 8 + col].classList.contains("highlight");
+
+        if (isValid) {
+          // If a King or Rook is moved we modify the castling flags as per the current player
+
+          if (chessboard[selectedRow][selectedCol] === "♔") {
+            isWhiteKingMoved = true;
+          }
+
+          if (chessboard[selectedRow][selectedCol] === "♚") {
+            isBlackKingMoved = true;
+          }
+
+          if (
+            chessboard[selectedRow][selectedCol] === "♖" &&
+            selectedCol === 0
+          ) {
+            isWhiteRookLeftMoved = true;
+          }
+
+          if (
+            chessboard[selectedRow][selectedCol] === "♜" &&
+            selectedCol === 0
+          ) {
+            isBlackRookLeftMoved = true;
+          }
+
+          if (
+            chessboard[selectedRow][selectedCol] === "♖" &&
+            selectedCol === 7
+          ) {
+            isWhiteRookRightMoved = true;
+          }
+
+          if (
+            chessboard[selectedRow][selectedCol] === "♜" &&
+            selectedCol === 7
+          ) {
+            isBlackRookRightMoved = true;
+          }
+
+          // If promotion can be done
+          if (
+            (chessboard[selectedRow][selectedCol] === "♙" && row === 0) ||
+            (chessboard[selectedRow][selectedCol] === "♟" && row === 7)
+          ) {
+            squares.forEach((item) => item.classList.remove("highlight"));
+            squares[row * 8 + col].classList.add("highlight");
+
+            if (whites.includes(chessboard[selectedRow][selectedCol])) {
+              document
+                .querySelector(".menu-white")
+                .classList.remove("d-none");
+              document.querySelector(".menu-white").classList.add("d-flex");
+            } else {
+              document
+                .querySelector(".menu-black")
+                .classList.remove("d-none");
+              document.querySelector(".menu-black").classList.add("d-flex");
+            }
+
+            promotePiecesMenu.classList.remove("d-none");
+            promotePiecesMenu.classList.add("d-flex");
+
+            promotionRow = row;
+            promotionCol = col;
+
+            alert(
+              "Choose a piece from the dropdown at the bottom to promote!"
+            );
+          } else {
+            // Moving the pieces
+            await makeMove(selectedRow, selectedCol, row, col);
+          }
+        }
+        // If the move is invalid
+        else {
+          alert("Invalid move!");
+        }
+      }
+    }
+  }
+
+  function makeMove(fromRow, fromCol, toRow, toCol, myMove = true) {
+    let opponent = document.querySelector(
+      `.square[data-row="${toRow}"][data-col="${toCol}"]`
+    ).textContent;
+
+    // If a white king is to be moved
+    if (chessboard[fromRow][fromCol] === "♔") {
+      // If it is a Queen's side castling
+      if (fromRow === 7 && fromRow == toRow && fromCol == 4 && toCol === 2) {
+        // Updating the chessboard
+        chessboard[7][4] = "";
+        chessboard[7][2] = "♔";
+        chessboard[7][0] = "";
+        chessboard[7][3] = "♖";
+
+        // Updating the UI
+        squares[7 * 8 + 4].textContent = "";
+        squares[7 * 8 + 2].textContent = "♔";
+        squares[7 * 8 + 0].textContent = "";
+        squares[7 * 8 + 3].textContent = "♖";
+      }
+      // If it is a King's side castling
+      else if (
+        fromRow === 7 &&
+        fromRow == toRow &&
+        fromCol == 4 &&
+        toCol === 6
+      ) {
+        // Updating the chessboard
+        chessboard[7][4] = "";
+        chessboard[7][6] = "♔";
+        chessboard[7][7] = "";
+        chessboard[7][5] = "♖";
+
+        // Updating the UI
+        squares[7 * 8 + 4].textContent = "";
+        squares[7 * 8 + 6].textContent = "♔";
+        squares[7 * 8 + 7].textContent = "";
+        squares[7 * 8 + 5].textContent = "♖";
+      }
+      // If it is normal white king move
+      else {
+        // Updating the chessboard
+        chessboard[toRow][toCol] = chessboard[fromRow][fromCol];
+        chessboard[fromRow][fromCol] = "";
+
+        // Updating the UI
+        squares[toRow * 8 + toCol].textContent = chessboard[toRow][toCol];
+        squares[fromRow * 8 + fromCol].textContent = "";
+      }
+    }
+    // If a black king is to be moved
+    else if (chessboard[fromRow][fromCol] === "♚") {
+      // If it is a Queen's side castling
+      if (fromRow === 0 && fromRow == toRow && fromCol == 4 && toCol === 2) {
+        // Updating the chessboard
+        chessboard[0][4] = "";
+        chessboard[0][2] = "♚";
+        chessboard[0][0] = "";
+        chessboard[0][3] = "♜";
+
+        // Updating the UI
+        squares[4].textContent = "";
+        squares[2].textContent = "♚";
+        squares[0].textContent = "";
+        squares[3].textContent = "♜";
+      }
+      // If it is a King's side castling
+      else if (
+        fromRow === 0 &&
+        fromRow == toRow &&
+        fromCol == 4 &&
+        toCol === 6
+      ) {
+        // Updating the chessboard
+        chessboard[0][4] = "";
+        chessboard[0][6] = "♚";
+        chessboard[0][7] = "";
+        chessboard[0][5] = "♜";
+
+        // Updating the UI
+        squares[4].textContent = "";
+        squares[6].textContent = "♚";
+        squares[7].textContent = "";
+        squares[5].textContent = "♜";
+      }
+      // If it is a normal black king move
+      else {
+        // Updating the chessboard
+        chessboard[toRow][toCol] = chessboard[fromRow][fromCol];
+        chessboard[fromRow][fromCol] = "";
+
+        // Updating the UI
+        squares[toRow * 8 + toCol].textContent = chessboard[toRow][toCol];
+        squares[fromRow * 8 + fromCol].textContent = "";
+      }
+    }
+    // If an En Passant is to be done
+    else if (
+      (chessboard[fromRow][fromCol] === "♙" ||
+        chessboard[fromRow][fromCol] === "♟") &&
+      Math.abs(fromRow - toRow) === 1 &&
+      Math.abs(fromCol - toCol) === 1 &&
+      chessboard[toRow][toCol] === ""
+    ) {
+      opponent = whites.includes(chessboard[fromRow][fromCol]) ? "♟" : "♙";
+      // Updating the chessboard
+      chessboard[toRow][toCol] = chessboard[fromRow][fromCol];
+      chessboard[fromRow][fromCol] = "";
+      chessboard[lastMove.toRow][lastMove.toCol] = "";
+
+      // Updating the UI
+      squares[toRow * 8 + toCol].textContent = chessboard[toRow][toCol];
+      squares[fromRow * 8 + fromCol].textContent = "";
+      squares[lastMove.toRow * 8 + lastMove.toCol].textContent = "";
+    }
+    // If a normal move is to be made
+    else {
+      // Updating the chessboard
+      chessboard[toRow][toCol] = chessboard[fromRow][fromCol];
+      chessboard[fromRow][fromCol] = "";
+
+      // Updating the UI
+      squares[toRow * 8 + toCol].textContent = chessboard[toRow][toCol];
+      squares[fromRow * 8 + fromCol].textContent = "";
+    }
+
+    // Remove existing highlighting
+    document.querySelectorAll(".square").forEach((item) => {
+      item.classList.remove("highlight");
+      item.classList.remove("red");
+    });
+
+    // Updating the last move
+    lastMove = {
+      fromRow: fromRow,
+      fromCol: fromCol,
+      toRow: toRow,
+      toCol: toCol,
+      piece: chessboard[toRow][toCol],
+    };
+
+    // If an opponent piece is captured
+    if (isOpponentPiece(opponent)) {
+      // Updating the lost pieces UI
+      document.querySelector(`.lost-pieces-${currentPlayer}`).innerHTML +=
+        opponent;
+    }
+
+    // Resetting the selected square
+    selectedSquare = null;
+    promotionRow = null;
+    promotionCol = null;
+
+    // Resetting the current player
+    currentPlayer = currentPlayer === "white" ? "black" : "white";
+    // Updating the current player UI
+    currentPlayerSpan.innerHTML = currentPlayer;
+
+    if (myMove)
+      websocket.send(
+        JSON.stringify({
+          move: {
+            fromRow,
+            fromCol,
+            toRow,
+            toCol,
+            token: localStorage.getItem("token"),
+          },
+        })
+      );
+
+    // If the move caused a checkmate
+    if (isCheckmate()) {
+      alert("Checkmate! Press OK to restart the game");
+      // Restarting the game
+      resetGame();
+    }
+    // If the move caused a stalemate
+    else if (isStalemate()) {
+      alert("Stalemate! Press OK to restart the game");
+      // Restarting the game
+      resetGame();
+    }
+  }
+
+  document
+    .querySelector(".promote-btn")
+    .addEventListener("click", async (e) => {
+      e.preventDefault();
+      let piece = document.querySelector(".selected");
+      if (piece === "" || piece === null) {
+        alert("Please choose a piece");
+      } else {
+        // Getting the row & col of the selected piece
+        const selectedRow = parseInt(selectedSquare.getAttribute("data-row"));
+        const selectedCol = parseInt(selectedSquare.getAttribute("data-col"));
+
+        chessboard[selectedRow][selectedCol] = piece.innerHTML;
+
+        await makeMove(selectedRow, selectedCol, promotionRow, promotionCol);
+
+        piece.classList.remove("selected");
+
+        chessMenus.forEach((item) => item.classList.remove("d-flex"));
+        chessMenus.forEach((item) => item.classList.add("d-none"));
+
+        promotePiecesMenu.classList.remove("d-flex");
+        promotePiecesMenu.classList.add("d-none");
+      }
+    });
+
+  function selectPiece(piece) {
+    chessMenuItems.forEach((item) => {
+      item.classList.remove("selected");
+      if (item.textContent === piece) {
+        item.classList.add("selected");
+      }
+    });
+  }
+
+  chessMenuItems.forEach((item) =>
+    item.addEventListener("click", () => {
+      selectPiece(item.innerHTML);
+    })
+  );
+
+  // Function to check if a piece belongs to the opponent
+  function isOpponentPiece(piece) {
+    // Implement your logic to check the color of the piece
+    if (
+      (currentPlayer === "white" && blacks.includes(piece)) ||
+      (currentPlayer === "black" && whites.includes(piece))
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // Function to check if a move is valid
+  function isValidMove(fromRow, fromCol, toRow, toCol) {
+    const piece = chessboard[fromRow][fromCol];
+    const target = chessboard[toRow][toCol];
+    const fromColor = whites.includes(piece) ? "white" : "black";
+    const toColor = whites.includes(target) ? "white" : "black";
+
+    // Piece can't move to its own location
+    if (fromRow == toRow && fromCol == toCol) return false;
+
+    // User can't move a piece to a place where it's own piece is present
+    if (target !== "") {
+      if (fromColor === toColor) {
+        return false;
+      }
+    }
+
+    let isValid = validityFunctions[piece](fromRow, fromCol, toRow, toCol);
+
+    if (isValid === true) {
+      isValid = isValid && !isIllegalMove(fromRow, fromCol, toRow, toCol);
+    }
+
+    return isValid;
+  }
+
+  // Function to check if a rook move is valid
+  function isValidRookMove(fromRow, fromCol, toRow, toCol) {
+    // Check if the move is horizontal or vertical
+    if (fromRow === toRow || fromCol === toCol) {
+      // Check if there are any pieces in the way
+      if (fromRow === toRow) {
+        const start = Math.min(fromCol, toCol) + 1;
+        const end = Math.max(fromCol, toCol);
+
+        for (let col = start; col < end; col++) {
+          if (chessboard[fromRow][col] !== "") {
+            return false;
+          }
+        }
+      } else {
+        const start = Math.min(fromRow, toRow) + 1;
+        const end = Math.max(fromRow, toRow);
+
+        for (let row = start; row < end; row++) {
+          if (chessboard[row][fromCol] !== "") {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    }
+
+    return false;
+  }
+
+  // Function to check if a knight move is valid
+  function isValidKnightMove(fromRow, fromCol, toRow, toCol) {
+    // Check if the move is L-shaped
+    const rowDiff = Math.abs(toRow - fromRow);
+    const colDiff = Math.abs(toCol - fromCol);
+
+    return (
+      (rowDiff === 2 && colDiff === 1) || (rowDiff === 1 && colDiff === 2)
+    );
+  }
+
+  // Function to check if a bishop move is valid
+  function isValidBishopMove(fromRow, fromCol, toRow, toCol) {
+    // Check if the move is diagonal
+    const rowDiff = Math.abs(toRow - fromRow);
+    const colDiff = Math.abs(toCol - fromCol);
+
+    if (rowDiff === colDiff && (rowDiff > 0 || colDiff > 0)) {
+      // Check if there are any pieces in the way
+      const rowDir = toRow > fromRow ? 1 : -1;
+      const colDir = toCol > fromCol ? 1 : -1;
+      let row = fromRow + rowDir;
+      let col = fromCol + colDir;
+      while (row !== toRow && col !== toCol) {
+        if (chessboard[row][col] !== "") {
+          return false;
+        }
+
+        row += rowDir;
+        col += colDir;
+      }
+
+      return true;
+    }
+
+    return false;
+  }
+
+  // Function to check if a queen move is valid
+  function isValidQueenMove(fromRow, fromCol, toRow, toCol) {
+    // Queen move is valid if it's a valid rook move or a valid bishop move
+    return (
+      isValidRookMove(fromRow, fromCol, toRow, toCol) ||
+      isValidBishopMove(fromRow, fromCol, toRow, toCol)
+    );
+  }
+
+  // Function to check if a king move is valid
+  function isValidKingMove(fromRow, fromCol, toRow, toCol) {
+    // Check for castling
+    const piece = chessboard[fromRow][fromCol];
+    const color = whites.includes(piece) ? "white" : "black";
+
+    if (color == "white") {
+      if (fromRow === 7 && fromRow == toRow && fromCol == 4 && toCol === 2) {
+        if (isWhiteKingMoved === false && isWhiteRookLeftMoved === false) {
+          for (var i = 1; i < 4; i++) {
+            if (chessboard[fromRow][i] !== "") {
+              return false;
+            }
+          }
+
+          for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+              if (
+                chessboard[row][col] !== "" &&
+                blacks.includes(chessboard[row][col])
+              ) {
+                if (
+                  isValidMove(row, col, 7, 4) ||
+                  isValidMove(row, col, 7, 3) ||
+                  isValidMove(row, col, 7, 2)
+                ) {
+                  return false;
+                }
+              }
+            }
+          }
+
+          return true;
+        }
+      } else if (
+        fromRow === 7 &&
+        fromRow == toRow &&
+        fromCol == 4 &&
+        toCol === 6
+      ) {
+        if (isWhiteKingMoved === false && isWhiteRookRightMoved === false) {
+          for (var i = 5; i < 7; i++) {
+            if (chessboard[fromRow][i] !== "") {
+              return false;
+            }
+          }
+
+          for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+              if (
+                chessboard[row][col] !== "" &&
+                blacks.includes(chessboard[row][col])
+              ) {
+                if (
+                  isValidMove(row, col, 7, 4) ||
+                  isValidMove(row, col, 7, 5) ||
+                  isValidMove(row, col, 7, 6)
+                ) {
+                  return false;
+                }
+              }
+            }
+          }
+
+          return true;
+        }
+      }
+    }
+
+    if (color == "black") {
+      if (fromRow === 0 && fromRow == toRow && fromCol == 4 && toCol === 2) {
+        if (isBlackKingMoved === false && isBlackRookLeftMoved === false) {
+          for (var i = 1; i < 4; i++) {
+            if (chessboard[fromRow][i] !== "") {
+              return false;
+            }
+          }
+
+          for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+              if (
+                chessboard[row][col] !== "" &&
+                whites.includes(chessboard[row][col])
+              ) {
+                if (
+                  isValidMove(row, col, 0, 4) ||
+                  isValidMove(row, col, 0, 3) ||
+                  isValidMove(row, col, 0, 2)
+                ) {
+                  return false;
+                }
+              }
+            }
+          }
+
+          return true;
+        }
+      } else if (
+        fromRow === 0 &&
+        fromRow == toRow &&
+        fromCol == 4 &&
+        toCol === 6
+      ) {
+        if (isBlackKingMoved === false && isBlackRookRightMoved === false) {
+          for (var i = 5; i < 7; i++) {
+            if (chessboard[fromRow][i] !== "") {
+              return false;
+            }
+          }
+
+          for (let row = 0; row < 8; row++) {
+            for (let col = 0; col < 8; col++) {
+              if (
+                chessboard[row][col] !== "" &&
+                whites.includes(chessboard[row][col])
+              ) {
+                if (
+                  isValidMove(row, col, 0, 4) ||
+                  isValidMove(row, col, 0, 5) ||
+                  isValidMove(row, col, 0, 6)
+                ) {
+                  return false;
+                }
+              }
+            }
+          }
+
+          return true;
+        }
+      }
+    }
+
+    // Check if the move is one square away horizontally, vertically, or diagonally
+    const rowDiff = Math.abs(toRow - fromRow);
+    const colDiff = Math.abs(toCol - fromCol);
+
+    return (
+      (rowDiff === 1 && colDiff === 0) ||
+      (rowDiff === 0 && colDiff === 1) ||
+      (rowDiff === 1 && colDiff === 1)
+    );
+  }
+
+  // Function to check if a pawn move is valid
+  function isValidPawnMove(fromRow, fromCol, toRow, toCol) {
+    const piece = chessboard[fromRow][fromCol];
+    const target = chessboard[toRow][toCol];
+
+    const direction = whites.includes(piece) ? -1 : 1;
+
+    // Check if it's a valid pawn move one square forward
+    if (fromCol === toCol && toRow === fromRow + direction && target === "") {
+      return true;
+    }
+
+    // Check if it's a valid pawn move two squares forward from the starting position
+    if (
+      ((direction === -1 && fromRow === 6) ||
+        (direction === 1 && fromRow === 1)) &&
+      fromCol === toCol &&
+      toRow === fromRow + 2 * direction &&
+      target === "" &&
+      chessboard[fromRow + direction][fromCol] === ""
+    ) {
+      return true;
+    }
+
+    // Check if it's an En passant
+    if (lastMove !== null) {
+      if (
+        (lastMove.piece === "♙" &&
+          lastMove.fromRow === 6 &&
+          lastMove.toRow === 4 &&
+          Math.abs(lastMove.toCol - fromCol) === 1 &&
+          fromRow === 4 &&
+          lastMove.toCol === toCol &&
+          toRow === 5 &&
+          chessboard[toRow][toCol] === "") ||
+        (lastMove.piece === "♟" &&
+          lastMove.fromRow === 1 &&
+          lastMove.toRow === 3 &&
+          Math.abs(lastMove.toCol - fromCol) === 1 &&
+          fromRow === 3 &&
+          lastMove.toCol === toCol &&
+          toRow === 2 &&
+          chessboard[toRow][toCol] === "")
+      ) {
+        return true;
+      }
+    }
+
+    // Check if it's a valid pawn capture move
+    if (
+      Math.abs(toCol - fromCol) === 1 &&
+      toRow === fromRow + direction &&
+      target !== ""
+    ) {
+      return true;
+    }
+
+    return false;
+  }
+
+  // Function to check for checkmate
+  function isCheckmate() {
+    // Find the positions of both kings
+    let kingPosition = null;
+
+    let pieces = [];
+
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        if (
+          chessboard[row][col] !== "" &&
+          ((currentPlayer === "white" &&
+            whites.includes(chessboard[row][col])) ||
+            (currentPlayer === "black" &&
+              blacks.includes(chessboard[row][col])))
+        ) {
+          pieces.push([chessboard[row][col], row, col]);
+        }
+
+        if (
+          (currentPlayer === "black" && chessboard[row][col] === "♚") ||
+          (currentPlayer === "white" && chessboard[row][col] === "♔")
+        ) {
+          kingPosition = {
+            row: row,
+            col: col,
+          };
+        }
+      }
+    }
+
+    // Check if the current player's king is in check
+    if (isKingThreatened(kingPosition)) {
+      // Check if the current player has any valid move that can remove the check
+      for (let row = 0; row < 8; row++) {
+        for (let col = 0; col < 8; col++) {
+          for (let i = 0; i < pieces.length; i++) {
+            if (isValidMove(pieces[i][1], pieces[i][2], row, col)) {
+              return false;
+            }
+          }
+        }
+      }
+
+      return true; // No move can remove the check, it's checkmate
+    }
+
+    return false; // White king is not in checkmate
+  }
+
+  // Function to check for stalemate
+  function isStalemate() {
+    // Getting position of all the pieces of the current player
+    let pieces = [];
+
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        if (
+          chessboard[row][col] !== "" &&
+          ((currentPlayer === "white" &&
+            whites.includes(chessboard[row][col])) ||
+            (currentPlayer === "black" &&
+              blacks.includes(chessboard[row][col])))
+        ) {
+          pieces.push([chessboard[row][col], row, col]);
+        }
+      }
+    }
+
+    // Going through all the squares present on the chess board
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        // Checking if any piece of the current player can move to this particular square
+        for (let i = 0; i < pieces.length; i++) {
+          if (isValidMove(pieces[i][1], pieces[i][2], row, col)) {
+            return false;
+          }
+        }
+      }
+    }
+
+    return true; // No valid moves available, it's stalemate
+  }
+
+  // Function to check if the king is threatened
+  function isKingThreatened(kingPosition) {
+    // Getting position of all the pieces of the opponent player
+    let pieces = [];
+
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        if (
+          chessboard[row][col] !== "" &&
+          ((currentPlayer === "white" &&
+            blacks.includes(chessboard[row][col])) ||
+            (currentPlayer === "black" &&
+              whites.includes(chessboard[row][col])))
+        ) {
+          pieces.push([chessboard[row][col], row, col]);
+        }
+      }
+    }
+
+    // Checking if any of the current player's piece can reach the king
+    for (let i = 0; i < pieces.length; i++) {
+      if (
+        validityFunctions[pieces[i][0]](
+          pieces[i][1],
+          pieces[i][2],
+          kingPosition.row,
+          kingPosition.col
+        )
+      ) {
+        // Checking if the valid move is a capture move or not
+        return true;
+      }
+    }
+
+    return false; // King is not threatened
+  }
+
+  // Function to check if the move is legal
+  function isIllegalMove(fromRow, fromCol, toRow, toCol) {
+    let oldboard = getBoard(chessboard);
+
+    let fromColor = whites.includes(chessboard[fromRow][fromCol])
+      ? "white"
+      : "black";
+
+    if (chessboard[fromRow][fromCol] === "♔") {
+      if (fromRow === 7 && fromRow == toRow && fromCol == 4 && toCol === 2) {
+        chessboard[7][4] = "";
+        chessboard[7][2] = "♔";
+        chessboard[7][0] = "";
+        chessboard[7][3] = "♖";
+      } else if (
+        fromRow === 7 &&
+        fromRow == toRow &&
+        fromCol == 4 &&
+        toCol === 6
+      ) {
+        chessboard[7][4] = "";
+        chessboard[7][6] = "♔";
+        chessboard[7][7] = "";
+        chessboard[7][5] = "♖";
+      } else {
+        chessboard[toRow][toCol] = chessboard[fromRow][fromCol];
+        chessboard[fromRow][fromCol] = "";
+      }
+    } else if (chessboard[fromRow][fromCol] === "♚") {
+      if (fromRow === 0 && fromRow == toRow && fromCol == 4 && toCol === 2) {
+        chessboard[0][4] = "";
+        chessboard[0][2] = "♚";
+        chessboard[0][0] = "";
+        chessboard[0][3] = "♜";
+      } else if (
+        fromRow === 0 &&
+        fromRow == toRow &&
+        fromCol == 4 &&
+        toCol === 6
+      ) {
+        chessboard[0][4] = "";
+        chessboard[0][6] = "♚";
+        chessboard[0][7] = "";
+        chessboard[0][5] = "♜";
+      } else {
+        chessboard[toRow][toCol] = chessboard[fromRow][fromCol];
+        chessboard[fromRow][fromCol] = "";
+      }
+    } else if (
+      (chessboard[fromRow][fromCol] === "♙" ||
+        chessboard[fromRow][fromCol] === "♟") &&
+      Math.abs(fromRow - toRow) === 1 &&
+      Math.abs(fromCol - toCol) === 1 &&
+      chessboard[toRow][toCol] === ""
+    ) {
+      chessboard[toRow][toCol] = chessboard[fromRow][fromCol];
+      chessboard[fromRow][fromCol] = "";
+      chessboard[lastMove.toRow][lastMove.toCol] = "";
+    } else {
+      chessboard[toRow][toCol] = chessboard[fromRow][fromCol];
+      chessboard[fromRow][fromCol] = "";
+    }
+
+    let kingPosition = null;
+
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < 8; col++) {
+        if (
+          (fromColor === "black" && chessboard[row][col] === "♚") ||
+          (fromColor === "white" && chessboard[row][col] === "♔")
+        ) {
+          kingPosition = {
+            row: row,
+            col: col,
+          };
+        }
+      }
+    }
+
+    if (kingPosition === null) return false;
+
+    for (var i = 0; i < 8; i++) {
+      for (var j = 0; j < 8; j++) {
+        if (
+          chessboard[kingPosition.row][kingPosition.col] === "" ||
+          chessboard[i][j] === ""
+        )
+          continue;
+
+        // Piece can't be moved to its own place
+        if (i == kingPosition.row && j == kingPosition.col) continue;
+
+        // User can't move a piece to a place where it's own piece is present
+        if (
+          (whites.includes(chessboard[i][j]) ? "white" : "black") ===
+          fromColor
+        )
+          continue;
+
+        if (
+          validityFunctions[chessboard[i][j]](
+            i,
+            j,
+            kingPosition.row,
+            kingPosition.col
+          )
+        ) {
+          chessboard = getBoard(oldboard);
+          return true;
+        }
+      }
+    }
+    chessboard = getBoard(oldboard);
+    return false;
+  }
+
+  // Function to highlight squares where a piece can go
+  async function highlightValidMoves(piece, row, col) {
+    const highlightedSquares = document.querySelectorAll(".highlight");
+    highlightedSquares.forEach((item) => item.classList.remove("highlight"));
+
+    for (var i = 0; i < 8; i++) {
+      for (var j = 0; j < 8; j++) {
+        const validity = await isValidMove(row, col, i, j);
+        if (validity) {
+          const square = document.querySelector(
+            `.square[data-row="${i}"][data-col="${j}"]`
+          );
+          square.classList.add("highlight");
+        }
+      }
+    }
+  }
+
+  // Function to copy and return the same board
+  function getBoard(oldboard) {
+    let board = [];
+    for (var i = 0; i < 8; i++) {
+      let temp = [];
+      for (var j = 0; j < 8; j++) {
+        temp.push(oldboard[i][j]);
+      }
+      board.push(temp);
+    }
+    return board;
+  }
+
+  // Function to print the board
+  function printChessBoard(board) {
+    let boardString = "";
+    for (var i = 0; i < 8; i++) {
+      for (var j = 0; j < 8; j++) {
+        boardString += " " + board[i][j] + " ";
+      }
+      boardString += "\n";
+    }
+    console.log(boardString);
+  }
+
+  // Initialize the chessboard and websocket
+  resetGame();
+  setupWebSocket();
+</script>
+
+</html>

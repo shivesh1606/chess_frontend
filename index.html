@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/game.css" />
+    <title>Chess Game</title>
+    <script src="./js/auth.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Chess Game</h1>
+        <h2 class="game-id">Game Id: </h2>
+        <div class="d-flex">
+            <h2 class="white-player pr-10">White: </h2>
+            <h2 class="black-player pr-10">Black: </h2>
+        </div>
+        <div class="board">
+
+        </div>
+        <h2 class="players">
+            Current Player: <span class="current-player">white</span>
+        </h2>
+        <div class="lost-pieces">
+            <h2>Lost White Pieces: <span class="lost-pieces-white"></span></h2>
+            <h2>Lost Black Pieces: <span class="lost-pieces-black"></span></h2>
+        </div>
+        <div>
+            <button class="new-game">New Game</button>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script type="module" src="./js/game.js"></script>
+<script type="module" src="./js/index.js"></script>
+<script type="module" src="./js/validators.js"></script>
+
+
+</html>
