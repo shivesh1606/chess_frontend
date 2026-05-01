@@ -148,18 +148,73 @@ export function isValidQueenMove(game, move) {
     );
 }
 
+// Returns true if any piece of attackerColor can attack (targetRow, targetCol).
+// Handles pawn and king attacks directly to avoid recursion / incorrect pawn-forward checks.
+function isSquareAttackedBy(game, targetRow, targetCol, attackerColor) {
+    const pawnDir = attackerColor === 'white' ? -1 : 1;
+    for (let r = 0; r < 8; r++) {
+        for (let c = 0; c < 8; c++) {
+            const piece = game.board.board[r][c];
+            if (!piece || piece.color !== attackerColor) continue;
+            if (piece.icon === ICONS[attackerColor].pawn) {
+                if (r + pawnDir === targetRow && Math.abs(c - targetCol) === 1) return true;
+            } else if (piece.icon === ICONS[attackerColor].king) {
+                if (Math.abs(r - targetRow) <= 1 && Math.abs(c - targetCol) <= 1 && !(r === targetRow && c === targetCol)) return true;
+            } else {
+                const dummy = { ...game, currentPlayer: attackerColor };
+                if (validityFunctions[piece.icon](dummy, { fromRow: r, fromCol: c, toRow: targetRow, toCol: targetCol })) return true;
+            }
+        }
+    }
+    return false;
+}
+
 // Function to check if a king move is valid
 export function isValidKingMove(game, move) {
 
-    // Check if the move is one square away horizontally, vertically, or diagonally
+    // Normal one-square king move
     const rowDiff = Math.abs(move.toRow - move.fromRow);
     const colDiff = Math.abs(move.toCol - move.fromCol);
 
-    return (
-        (rowDiff === 1 && colDiff === 0) ||
-        (rowDiff === 0 && colDiff === 1) ||
-        (rowDiff === 1 && colDiff === 1)
-    );
+    if ((rowDiff === 1 && colDiff === 0) || (rowDiff === 0 && colDiff === 1) || (rowDiff === 1 && colDiff === 1)) {
+        return true;
+    }
+
+    // Castling: king moves exactly 2 squares horizontally from its starting position
+    if (rowDiff === 0 && colDiff === 2) {
+        const color = game.currentPlayer;
+        const rank = color === 'white' ? 7 : 0;
+        if (move.fromRow !== rank || move.fromCol !== 4) return false;
+
+        const kingMoved = color === 'white' ? game.whiteKingMoved : game.blackKingMoved;
+        if (kingMoved) return false;
+
+        const opponentColor = color === 'white' ? 'black' : 'white';
+
+        if (move.toCol === 6) {
+            const rookMoved = color === 'white' ? game.whiteRightRookMoved : game.blackRightRookMoved;
+            if (rookMoved) return false;
+            if (!game.board.board[rank][7] || game.board.board[rank][7].icon !== ICONS[color].rook) return false;
+            if (game.board.board[rank][5] || game.board.board[rank][6]) return false;
+            if (isSquareAttackedBy(game, rank, 4, opponentColor)) return false;
+            if (isSquareAttackedBy(game, rank, 5, opponentColor)) return false;
+            if (isSquareAttackedBy(game, rank, 6, opponentColor)) return false;
+            return true;
+        }
+
+        if (move.toCol === 2) {
+            const rookMoved = color === 'white' ? game.whiteLeftRookMoved : game.blackLeftRookMoved;
+            if (rookMoved) return false;
+            if (!game.board.board[rank][0] || game.board.board[rank][0].icon !== ICONS[color].rook) return false;
+            if (game.board.board[rank][1] || game.board.board[rank][2] || game.board.board[rank][3]) return false;
+            if (isSquareAttackedBy(game, rank, 4, opponentColor)) return false;
+            if (isSquareAttackedBy(game, rank, 3, opponentColor)) return false;
+            if (isSquareAttackedBy(game, rank, 2, opponentColor)) return false;
+            return true;
+        }
+    }
+
+    return false;
 }
 
 // Function to check if a pawn move is valid
@@ -194,6 +249,26 @@ export function isValidPawnMove(game, move) {
         game.board.board[move.toRow][move.toCol].color !== game.currentPlayer
     ) {
         return true;
+    }
+
+    // En passant: diagonal move to empty square when last move was an adjacent 2-square pawn advance
+    if (
+        game.lastMove !== null &&
+        Math.abs(move.toCol - move.fromCol) === 1 &&
+        move.toRow === move.fromRow + direction &&
+        game.board.board[move.toRow][move.toCol] === null
+    ) {
+        const lastPiece = game.board.board[game.lastMove.toRow][game.lastMove.toCol];
+        if (
+            lastPiece &&
+            lastPiece.color !== game.currentPlayer &&
+            (lastPiece.icon === ICONS.black.pawn || lastPiece.icon === ICONS.white.pawn) &&
+            Math.abs(game.lastMove.toRow - game.lastMove.fromRow) === 2 &&
+            game.lastMove.toRow === move.fromRow &&
+            game.lastMove.toCol === move.toCol
+        ) {
+            return true;
+        }
     }
 
     return false;
@@ -354,7 +429,7 @@ function isIllegalMove(game, move) {
     let initial = JSON.stringify(game);
 
     let currentPlayer = game.board.board[move.fromRow][move.fromCol].color 
-    let opponentColor = currentPlayer.color === "white" ? "black" : "white";
+    let opponentColor = currentPlayer === "white" ? "black" : "white";
 
     let dummy = JSON.parse(JSON.stringify(game))
 

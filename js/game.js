@@ -124,7 +124,7 @@ export function makeMove(game, row, col, promoted=false, check = false) {
     game.lastMove = new Move(game.selectedSquare.row, game.selectedSquare.col, row, col)
 
     if (!game.whiteKingMoved && game.board.board[game.selectedSquare.row][game.selectedSquare.col].icon === ICONS.white.king) game.whiteKingMoved = true;
-    if (!game.whiteKingMoved && game.board.board[game.selectedSquare.row][game.selectedSquare.col].icon === ICONS.white.king) game.blackKingMoved = true;
+    if (!game.blackKingMoved && game.board.board[game.selectedSquare.row][game.selectedSquare.col].icon === ICONS.black.king) game.blackKingMoved = true;
     if (!game.whiteLeftRookMoved && game.selectedSquare.row === 7 && game.selectedSquare.col === 0 && game.board.board[game.selectedSquare.row][game.selectedSquare.col].icon === ICONS.white.rook) game.whiteLeftRookMoved = true;
     if (!game.whiteRightRookMoved && game.selectedSquare.row === 7 && game.selectedSquare.col === 7 && game.board.board[game.selectedSquare.row][game.selectedSquare.col].icon === ICONS.white.rook) game.whiteRightRookMoved = true;
     if (!game.blackLeftRookMoved && game.selectedSquare.row === 0 && game.selectedSquare.col === 0 && game.board.board[game.selectedSquare.row][game.selectedSquare.col].icon === ICONS.black.rook) game.blackLeftRookMoved = true;
@@ -135,9 +135,38 @@ export function makeMove(game, row, col, promoted=false, check = false) {
     game.board.board[game.selectedSquare.row][game.selectedSquare.col].row = row;
     game.board.board[game.selectedSquare.row][game.selectedSquare.col].col = col;
 
+    const movingIcon = game.board.board[game.selectedSquare.row][game.selectedSquare.col].icon;
+
+    // En passant: pawn moves diagonally to an empty square — remove captured pawn from its actual square
+    if ((movingIcon === ICONS.white.pawn || movingIcon === ICONS.black.pawn) &&
+        Math.abs(col - game.selectedSquare.col) === 1 &&
+        game.board.board[row][col] === null) {
+        const epCapture = game.board.board[game.selectedSquare.row][col];
+        if (epCapture) {
+            if (game.currentPlayer === COLORS.W) game.capturedBlacks.push(epCapture);
+            else game.capturedWhites.push(epCapture);
+            game.board.board[game.selectedSquare.row][col] = null;
+        }
+    }
+
     if(game.board.board[row][col]){
         if(game.currentPlayer===COLORS.W) game.capturedBlacks.push(game.board.board[row][col]);
         else game.capturedWhites.push(game.board.board[row][col])
+    }
+
+    // Castling: when king moves 2 squares, teleport the rook to its new square
+    if ((movingIcon === ICONS.white.king || movingIcon === ICONS.black.king) &&
+        Math.abs(col - game.selectedSquare.col) === 2) {
+        const rank = game.selectedSquare.row;
+        if (col === 6) {
+            game.board.board[rank][5] = game.board.board[rank][7];
+            if (game.board.board[rank][5]) game.board.board[rank][5].col = 5;
+            game.board.board[rank][7] = null;
+        } else {
+            game.board.board[rank][3] = game.board.board[rank][0];
+            if (game.board.board[rank][3]) game.board.board[rank][3].col = 3;
+            game.board.board[rank][0] = null;
+        }
     }
 
     if(!promoted) game.board.board[row][col] = game.board.board[game.selectedSquare.row][game.selectedSquare.col]
